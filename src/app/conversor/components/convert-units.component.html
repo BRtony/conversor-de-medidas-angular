@@ -1,0 +1,76 @@
+
+<div class="container">
+    <div class="card">
+        <div class="card-header text-center display-6">
+            Conversor Universal de Medidas
+        </div>
+
+        <div class="card-body">
+            <form #conversaoForm="ngForm" class="row align-middle">
+                <!-- seletor de grandeza -->
+                <div class="form-group col-12 mb-3">
+                    <label for="tipo">Tipo de medida:</label>
+                    <div class="col-12">
+                        <select name="tipo" class="form-select " [(ngModel)]="tipo" required
+                            (change)="listarUnidades();converter()">
+                            <option *ngFor="let tipo of tipos" [value]="tipo">
+                                {{tipo}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group col-md-6 mb-3 ">
+                    <label for="valor">Valor para converter:</label>
+                    <div class="input-group">
+
+                        <!-- unidade de entrada -->
+                        <select name="medidaDe" class="form-select-sm" [(ngModel)]="conversao.medidaDe" required
+                            (change)="converter()">
+                            <option *ngFor="let medida of medidas" [value]="medida.abbr">
+                                {{medida.abbr}} - {{medida.singular}}
+                            </option>
+                        </select>
+
+                        <!-- valor a ser convertido -->
+                        <input type="number" step='0.01' min='0' name="valorEntrada"
+                            [(ngModel)]="conversao.valorEntrada" class="form-control" placeholder="0"
+                            (keyup)="converter()">
+                        <span class="input-group-text" id="basic-addon1">{{conversao.medidaDe}}</span>
+                    </div>
+                </div>
+
+                <!-- Unidade de saída -->
+                <div class="form-group col-md-6 mb-3">
+                    <label for="valor">Resultado:</label><br>
+                    <div class="input-group">
+                        <select name="medidaPara" class="form-select-sm" [(ngModel)]="conversao.medidaPara" required
+                            (change)="converter()">
+                            <option *ngFor="let medida of medidas" [value]="medida.abbr">
+                                {{medida.abbr}} - {{medida.singular}}
+                            </option>
+                        </select>
+                        <input type="number" step='0.01' min='0' name="valorSaida" [(ngModel)]="conversao.valorSaida"
+                            class="form-control" placeholder="0" readonly>
+                        <span class="input-group-text" id="basic-addon1">{{conversao.medidaPara}}</span>
+                    </div>
+                </div>
+
+                <!-- botão de trocar unidade -->
+                <div class="form-group col-6 text-center mb-3">
+                    <button class="btn btn-warning w-100" (click)="trocarUnidade();converter()">Trocar Unidades</button>
+                </div>
+
+                <!-- botão de trocar valores -->
+                <div class="form-group col-6 text-center mb-3">
+                    <button class="btn btn-warning w-100 " (click)="trocarValor();converter()">Trocar Valores</button>
+                </div>
+
+            </form>
+        </div>
+        <div class="card-footer text-center text-secondary">
+            Developed by André Luiz M. Miranda, Eduardo Di Nizo, Gustavo Antonelli, Luca A. Rampinelli, Weslley Brilhante
+        </div>
+    </div>
+</div>
