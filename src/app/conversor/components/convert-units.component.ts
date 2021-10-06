@@ -12,8 +12,8 @@ import { ConversorService } from '../services';
 export class ConvertUnitsComponent implements OnInit {
   medidas: any;
   conversao: Conversao = new Conversao('m', 'mm');
-  tipos?: string[];
   tipo: Measure = 'length';
+  tipos?: string[];
 
   @ViewChild('conversaoForm', { static: true })
   conversaoForm?: NgForm;
